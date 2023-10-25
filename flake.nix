@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/c0c78361164a6601c8c0ce0b8560891f42c053f0";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs = { self, nixpkgs, flake-utils }:
@@ -93,7 +93,7 @@
         };
         packages.rocm = pkgs.stdenv.mkDerivation {
           inherit name src meta postPatch nativeBuildInputs postInstall;
-          buildInputs = with pkgs; buildInputs ++ [ hip hipblas rocblas ];
+          buildInputs = with pkgs; buildInputs ++ [ rocmPackages.clr rocmPackages.hipblas rocmPackages.rocblas ];
           cmakeFlags = cmakeFlags ++ [
             "-DLLAMA_HIPBLAS=1"
             "-DCMAKE_C_COMPILER=hipcc"
